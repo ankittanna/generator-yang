@@ -19,8 +19,14 @@ var _ = require('lodash');
 	}
 }); */
 
+var MyBase = generators.Base.extend({
+	anotherHelper: function(){
+		console.log("Inside Another Helper");
+	}
+});
+
 // Works by Order
-module.exports = generators.Base.extend({
+module.exports = MyBase.extend({
 	init: function(){
 		console.log("Inisde Init");
 
@@ -32,6 +38,7 @@ module.exports = generators.Base.extend({
 		console.log("Inside Foo");
 	},
 	bar: function(){
+		this.anotherHelper();
 		this._foo();
 		this.baz();
 		console.log("Inside Bar");
