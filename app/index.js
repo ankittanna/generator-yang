@@ -25,6 +25,7 @@ module.exports = generators.Base.extend({
 		console.log("Inside Foo");
 	},
 	bar: function(){
+		this._foo();
 		console.log("Inside Bar");
 	}
 });
