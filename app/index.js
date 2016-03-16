@@ -33,6 +33,7 @@ module.exports = generators.Base.extend({
 	},
 	bar: function(){
 		this._foo();
+		this.baz();
 		console.log("Inside Bar");
 	}
 });
