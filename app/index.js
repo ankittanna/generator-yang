@@ -3,7 +3,17 @@
 var generators = require('yeoman-generator');
 var _ = require('lodash');
 
-module.exports = generators.Base.extend({
+/*module.exports = generators.Base.extend({
+	method1: function(){
+		console.log("Hello World!");
+	}
+}); */
+
+module.exports = generators.NamedBase.extend({
+	constructor: function(){
+		generators.NamedBase.apply(this, arguments);
+		this.log('name ', this.name);
+	},
 	method1: function(){
 		console.log("Hello World!");
 	}
