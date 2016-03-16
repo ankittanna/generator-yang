@@ -44,3 +44,15 @@ module.exports = MyBase.extend({
 		console.log("Inside Bar");
 	}
 });
+
+
+// Tasks of the generators
+// Initializing
+// Prompting
+// Configuring
+// default
+// Writing
+// Conflicts
+// Install
+// End
+
