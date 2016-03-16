@@ -3,30 +3,11 @@
 var generators = require('yeoman-generator');
 var _ = require('lodash');
 
-/*module.exports = generators.Base.extend({
-	method1: function(){
-		console.log("Hello World!");
-	}
-}); */
-
-/* module.exports = generators.NamedBase.extend({
+module.exports = generators.Base.extend({
 	constructor: function(){
 		generators.NamedBase.apply(this, arguments);
 		this.log('name ', this.name);
 	},
-	method1: function(){
-		console.log("Hello World!");
-	}
-}); */
-
-var MyBase = generators.Base.extend({
-	anotherHelper: function(){
-		console.log("Inside Another Helper");
-	}
-});
-
-// Works by Order
-module.exports = MyBase.extend({
 	init: function(){
 		console.log("Inisde Init");
 
@@ -42,17 +23,37 @@ module.exports = MyBase.extend({
 		this._foo();
 		this.baz();
 		console.log("Inside Bar");
+	},
+	initializing: function(){
+		console.log("Step 1");
+	},
+	prompting: {
+		method1: function(){
+			console.log("Step 2.1");
+		},
+		method2: function(){
+			console.log("Step 2.2");
+		}
+	},
+	configuring: function(){
+		console.log("Step 3");
+	},
+	default: function(){
+		console.log("Step 4");
+	},
+	writing: function(){
+		console.log("Step 5");
+	},
+	conflicts: function(){
+		console.log("Step 6");
+	},
+	install: function(){
+		console.log("Step 7");
+	},
+	end: function(){
+		console.log("Step 8");
+	},
+	customMethod: function(){
+		console.log("Its a custom method. Falls by default in default slot executing after default.");
 	}
 });
-
-
-// Tasks of the generators
-// Initializing
-// Prompting
-// Configuring
-// default
-// Writing
-// Conflicts
-// Install
-// End
-
