@@ -21,6 +21,13 @@ var _ = require('lodash');
 
 // Works by Order
 module.exports = generators.Base.extend({
+	init: function(){
+		console.log("Inisde Init");
+
+		this.baz = function(){
+			console.log('Inside Baz');
+		};	
+	},
 	_foo: function(){
 		console.log("Inside Foo");
 	},
