@@ -16,7 +16,8 @@
 // Use writing method. Inside the writing object use several functions orderly
 // Create a templates folder and copy a static file inside it.
 // use templatePath and destinationPath to determine the locations.
-// use _ in front of file name when you are using in template path. 
+// this.copy, this.directory
+// Conflict: Ynaxdh; Y is caps which is by default yes, n - no, a - yes for this and all, x - abort, d - show differences, h - help
 
 
 'use strict';
@@ -52,20 +53,31 @@ module.exports = generators.Base.extend({
 		git: function(){},
 		bower: function(){},
 		appStaticFiles: function(){
-			console.log('Template Path: ' + this.templatePath());
-			console.log('Destination Path: ' + this.destinationPath());
+			// console.log('Template Path: ' + this.templatePath());
+			// console.log('Destination Path: ' + this.destinationPath());
 
 			// Now no longer need of adding _ to the files
 			var source = this.templatePath('favicon.ico');
 			var destination = this.destinationPath('src/favicon.ico');
 
-			console.log('Source: ' + source);
-			console.log('Destination: ' + destination);
+			// console.log('Source: ' + source);
+			// console.log('Destination: ' + destination);
 
 			this.copy(source, destination);
+			this.directory('styles', 'src/styles');
+
 		},
 		scripts: function(){},
-		html: function(){}
+		html: function(){
+			this.fs.copyTpl(
+				this.templatePath('_index.html'),
+				this.destinationPath('src/index.html'),
+				{
+					appTitle: 'My Sample Yeoman App',
+					appName: 'SampleApp'
+				}
+			);
+		}
 	},
 	conflicts: function(){
 		
