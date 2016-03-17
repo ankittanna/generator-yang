@@ -67,7 +67,15 @@ module.exports = generators.Base.extend({
 			this.directory('styles', 'src/styles');
 
 		},
-		scripts: function(){},
+		scripts: function(){
+			this.fs.copyTpl(
+				this.templatePath('app/scripts/_app.js'),
+				this.destinationPath('src/app/scripts/app.js'),
+				{
+					appName: 'SampleApp'
+				}
+			);
+		},
 		html: function(){
 			this.fs.copyTpl(
 				this.templatePath('_index.html'),
@@ -77,6 +85,7 @@ module.exports = generators.Base.extend({
 					appName: 'SampleApp'
 				}
 			);
+			this.directory('app/views', 'src/app/views');
 		}
 	},
 	conflicts: function(){
