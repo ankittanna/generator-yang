@@ -3,7 +3,13 @@
 var generators = require('yeoman-generator');
 var _ = require('lodash');
 
-module.exports = generators.Base.extend({
+var MyBase = generators.Base.extend({
+	anotherHelper: function(){
+		console.log("Inside Another Helper");
+	}
+});
+
+module.exports = MyBase.extend({
 	constructor: function(){
 		generators.NamedBase.apply(this, arguments);
 		this.log('name ', this.name);
@@ -54,6 +60,6 @@ module.exports = generators.Base.extend({
 		console.log("Step 8");
 	},
 	customMethod: function(){
-		console.log("Its a custom method. Falls by default in default slot executing after default.");
+		console.log("This is a custom method which gets called with the default set.");
 	}
 });
