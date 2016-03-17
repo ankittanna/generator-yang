@@ -1,65 +1,79 @@
+// Yeoman has to work with File Paths
+// Copy files and directories
+// Work with Template files
+// Writing a dynamic file
+// Common Artifcats
+
+// Important Points
+// Yeoman File Context: 
+// Destination Context - This is where the application will be scaffolded .yo-rc.json - determines the root of the project
+// Templates Context - This is where you read templated and generate sub generators
+
+// Uses in memory file system. Prevents overwriting.
+
+// File Paths and common Static Files
+// bower.json, package.json, favicon.ico, gulpflie.js, .gitignore, 
+// Use writing method. Inside the writing object use several functions orderly
+// Create a templates folder and copy a static file inside it.
+// use templatePath and destinationPath to determine the locations.
+// use _ in front of file name when you are using in template path. 
+
+
 'use strict';
 
 var generators = require('yeoman-generator');
 var _ = require('lodash');
 
-var MyBase = generators.Base.extend({
-	anotherHelper: function(){
-		console.log("Inside Another Helper");
-	}
-});
-
-module.exports = MyBase.extend({
-	constructor: function(){
-		generators.NamedBase.apply(this, arguments);
-		this.log('name ', this.name);
-	},
+module.exports = generators.Base.extend({
 	init: function(){
-		console.log("Inisde Init");
-
-		this.baz = function(){
-			console.log('Inside Baz');
-		};	
+			
 	},
 	_foo: function(){
-		console.log("Inside Foo");
+
 	},
 	bar: function(){
-		this.anotherHelper();
-		this._foo();
-		this.baz();
-		console.log("Inside Bar");
+		
 	},
 	initializing: function(){
-		console.log("Step 1");
+		
 	},
-	prompting: {
-		method1: function(){
-			console.log("Step 2.1");
-		},
-		method2: function(){
-			console.log("Step 2.2");
-		}
+	prompting: function(){
+		
 	},
 	configuring: function(){
-		console.log("Step 3");
+		
 	},
 	default: function(){
-		console.log("Step 4");
+		
 	},
-	writing: function(){
-		console.log("Step 5");
+	writing: {
+		gulpflie: function(){},
+		packageJSON: function(){},
+		git: function(){},
+		bower: function(){},
+		appStaticFiles: function(){
+			console.log('Template Path: ' + this.templatePath());
+			console.log('Destination Path: ' + this.destinationPath());
+
+			// Now no longer need of adding _ to the files
+			var source = this.templatePath('favicon.ico');
+			var destination = this.destinationPath('src/favicon.ico');
+
+			console.log('Source: ' + source);
+			console.log('Destination: ' + destination);
+
+			this.copy(source, destination);
+		},
+		scripts: function(){},
+		html: function(){}
 	},
 	conflicts: function(){
-		console.log("Step 6");
+		
 	},
 	install: function(){
-		console.log("Step 7");
+		
 	},
 	end: function(){
-		console.log("Step 8");
-	},
-	customMethod: function(){
-		console.log("This is a custom method which gets called with the default set.");
+		
 	}
 });
