@@ -19,7 +19,6 @@
 // this.copy, this.directory
 // Conflict: Ynaxdh; Y is caps which is by default yes, n - no, a - yes for this and all, x - abort, d - show differences, h - help
 
-// Leave the dot out of the convention for jshintrc, gitignore in templates and add it in the source file.
 
 'use strict';
 
@@ -49,32 +48,10 @@ module.exports = generators.Base.extend({
 		
 	},
 	writing: {
-		gulpflie: function(){
-			this.copy('_gulpfile.js', 'gulpflie.js');
-			this.copy('_gulp.config.js', 'gulp.config.js');
-			this.copy('jshintrc', '.jshintrc');
-		},
-		packageJSON: function(){
-			this.copy('_package.json', 'package.json');
-		},
-		git: function(){
-			this.copy('gitignore', '.gitignore');
-		},
-		bower: function(){
-			var bowerJSON = {
-				name: 'my-app', // TODO: Make it dynamic
-				license: 'MIT',
-				dependencies: {}
-			};
-
-			bowerJSON.dependencies['angular'] = '~1.4.6';
-			bowerJSON.dependencies['angular-bootstrap'] = '~0.13.4';
-			bowerJSON.dependencies['lodash'] = '~3.10.1';
-			bowerJSON.dependencies['moment'] = '~2.10.6';
-
-			this.fs.writeJSON('bower.json', bowerJSON)
-			this.copy('bowerrc', '.bowerrc');
-		},
+		gulpflie: function(){},
+		packageJSON: function(){},
+		git: function(){},
+		bower: function(){},
 		appStaticFiles: function(){
 			// console.log('Template Path: ' + this.templatePath());
 			// console.log('Destination Path: ' + this.destinationPath());
