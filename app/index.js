@@ -58,14 +58,41 @@ module.exports = generators.Base.extend({
 		this.log(yosay('Welcome to ' + chalk.yellow('YANG (YET ANOTHER ANGULAR GENERATOR)')+' !'));
 
 		var done = this.async();
-		this.prompt({
+		this.prompt([{
 			type: 'input',
 			name: 'ngappname',
 			message: 'Angular App Name (ng-app)',
 			default: 'app'
-		}, function(answers){
+		},
+		{
+			type: 'checkbox',
+			name: 'jslibs',
+			message: 'Which JS Libraries would you like to have?',
+			choices: [
+				{
+					name :'lodash',
+					value:'lodash',
+					checked: true
+				},
+				{
+					name :'angular-bootstrap',
+					value:'angularBootstrap',
+					checked: false
+				},
+				{
+					name :'momentjs',
+					value:'momentJS',
+					checked: false
+				}
+			]
+		}], function(answers){
 			this.log(answers);
 			this.ngappname = answers.ngappname;
+			
+			this.includesLodash = _.includes(answers.jslibs, "lodash");
+			this.includesMoment = _.includes(answers.jslibs, "momentJS");
+			this.includesAngularBootstrap = _.includes(answers.jslibs, "angularBootstrap");
+
 			done();
 		}.bind(this));
 	},
@@ -99,9 +126,16 @@ module.exports = generators.Base.extend({
 			{
 				bowerJSON.dependencies['angular-bootstrap'] = '~0.13.4';
 			}
-		
-			bowerJSON.dependencies['lodash'] = '~3.10.1';
-			bowerJSON.dependencies['moment'] = '~2.10.6';
+			
+			if(this.includesLodash)
+			{
+				bowerJSON.dependencies['lodash'] = '~3.10.1';	
+			}
+			
+			if(this.includesMoment)
+			{
+				bowerJSON.dependencies['moment'] = '~2.10.6';
+			}
 
 			this.fs.writeJSON('bower.json', bowerJSON)
 			this.copy('bowerrc', '.bowerrc');
