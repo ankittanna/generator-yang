@@ -25,8 +25,6 @@
 
 var generators = require('yeoman-generator');
 var _ = require('lodash');
-var chalk = require('chalk');
-var yosay = require('yosay');
 
 module.exports = generators.Base.extend({
 	init: function(){
@@ -38,18 +36,11 @@ module.exports = generators.Base.extend({
 	bar: function(){
 		
 	},
-	constructor: function(){
-		generators.Base.apply(this, arguments);
-
-		this.argument('appname', {type: String, required: true});
-		this.appname = _.kebabCase(this.appname);
-		this.log('AppName argument ', this.appname);
-	},
 	initializing: function(){
 		
 	},
 	prompting: function(){
-		this.log(yosay('Welcome to ' + chalk.yellow('YANG (YET ANOTHER ANGULAR GENERATOR)')+' !'));
+		
 	},
 	configuring: function(){
 		
@@ -71,7 +62,7 @@ module.exports = generators.Base.extend({
 		},
 		bower: function(){
 			var bowerJSON = {
-				name: this.appname, // TODO: Make it dynamic
+				name: 'my-app', // TODO: Make it dynamic
 				license: 'MIT',
 				dependencies: {}
 			};
@@ -104,7 +95,7 @@ module.exports = generators.Base.extend({
 				this.templatePath('app/scripts/_app.js'),
 				this.destinationPath('src/app/scripts/app.js'),
 				{
-					appName: this.appname
+					appName: 'SampleApp'
 				}
 			);
 		},
@@ -113,8 +104,8 @@ module.exports = generators.Base.extend({
 				this.templatePath('_index.html'),
 				this.destinationPath('src/index.html'),
 				{
-					appTitle: _.startCase(this.appname),
-					appName: this.appname
+					appTitle: 'My Sample Yeoman App',
+					appName: 'SampleApp'
 				}
 			);
 			this.directory('app/views', 'src/app/views');
