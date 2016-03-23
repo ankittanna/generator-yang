@@ -56,6 +56,18 @@ module.exports = generators.Base.extend({
 	},
 	prompting: function(){
 		this.log(yosay('Welcome to ' + chalk.yellow('YANG (YET ANOTHER ANGULAR GENERATOR)')+' !'));
+
+		var done = this.async();
+		this.prompt({
+			type: 'input',
+			name: 'ngappname',
+			message: 'Angular App Name (ng-app)',
+			default: 'app'
+		}, function(answers){
+			this.log(answers);
+			this.ngappname = answers.ngappname;
+			done();
+		}.bind(this));
 	},
 	configuring: function(){
 		
@@ -114,7 +126,7 @@ module.exports = generators.Base.extend({
 				this.templatePath('app/scripts/_app.js'),
 				this.destinationPath('src/app/scripts/app.js'),
 				{
-					appName: this.appname
+					appName: this.ngappname
 				}
 			);
 		},
@@ -124,7 +136,7 @@ module.exports = generators.Base.extend({
 				this.destinationPath('src/index.html'),
 				{
 					appTitle: _.startCase(this.appname),
-					appName: this.appname
+					appName: this.ngappname
 				}
 			);
 			this.directory('app/views', 'src/app/views');
