@@ -44,6 +44,12 @@ module.exports = generators.Base.extend({
 		this.argument('appname', {type: String, required: true});
 		this.appname = _.kebabCase(this.appname);
 		this.log('AppName argument ', this.appname);
+
+		this.option('includeutils', {
+			desc: 'Optionally includes Angular Bootstrap Library.',
+			type: Boolean,
+			default: false
+		});
 	},
 	initializing: function(){
 		
@@ -77,7 +83,11 @@ module.exports = generators.Base.extend({
 			};
 
 			bowerJSON.dependencies['angular'] = '~1.4.6';
-			bowerJSON.dependencies['angular-bootstrap'] = '~0.13.4';
+			if(this.options.includeutils)
+			{
+				bowerJSON.dependencies['angular-bootstrap'] = '~0.13.4';
+			}
+		
 			bowerJSON.dependencies['lodash'] = '~3.10.1';
 			bowerJSON.dependencies['moment'] = '~2.10.6';
 
